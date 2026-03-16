@@ -19,7 +19,7 @@ namespace StudioAssistant
 
             splash.Close();
 
-            Application.Run(new Form1());
+            Application.Run(new frmHome());
         }
     }
 }

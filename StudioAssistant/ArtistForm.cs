@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-
-namespace StudioAssistant
+﻿namespace StudioAssistant
 {
-    public partial class frm_ArtistIntake : Form
+    public partial class ArtistForm : Form
     {
         private Artist _artist; // Field to hold the artist data
-        public frm_ArtistIntake()
+        public ArtistForm()
         {
             InitializeComponent();
             _artist = new Artist();
@@ -20,7 +11,14 @@ namespace StudioAssistant
 
         public void LoadArtist(Artist artist)
         {
-            _artist = artist; // Load the artist data into the form controls
+            // Create a new instance so we don't edit the main list directly yet
+            _artist = new Artist(
+                artist.ArtistName,
+                artist.ContactFirstName,
+                artist.ContactLastName,
+                artist.ContactEmail,
+                artist.ContactPhone
+            );
         }
 
         public Artist GetArtist()
@@ -28,10 +26,10 @@ namespace StudioAssistant
             return _artist;  // Return the artist data from the form controls
         }
 
-        private void ArtistIntake_Load(object sender, EventArgs e)
+        private void ArtistForm_Load(object sender, EventArgs e)
         {
             // Load the artist data into the form controls
-            txtArtistName.DataBindings.Add("Text", _artist, "FirstName");
+            txtArtistName.DataBindings.Add("Text", _artist, "ArtistName");
             txtContactFirstName.DataBindings.Add("Text", _artist, "ContactFirstName");
             txtContactLastName.DataBindings.Add("Text", _artist, "ContactLastName");
             txtContactEmail.DataBindings.Add("Text", _artist, "ContactEmail");
@@ -41,19 +39,27 @@ namespace StudioAssistant
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            this.Validate(); // Trigger validation for the form controls
             // Save the data from the form controls back to the artist object
             //after saving close the form and return DialogResult.OK to indicate that the artist was saved successfully
             //open the workflow form for the artist
-            
+
             if (Validators.ContainsValue(txtArtistName.Text) == false)
             {
-                MessageBox.Show("Please enter a first name.");
+                MessageBox.Show("Please enter an Artist name.");
                 return;
             }
             //does the form have a Contact name?
             if (Validators.ContainsValue(txtContactFirstName.Text) == false)
             {
-                MessageBox.Show("Please enter one member name.");
+                MessageBox.Show("Please enter a contact first name.");
+                return;
+            }
+
+            //does the form have a Contact name?
+            if (Validators.ContainsValue(txtContactLastName.Text) == false)
+            {
+                MessageBox.Show("Please enter a contact last name.");
                 return;
             }
 

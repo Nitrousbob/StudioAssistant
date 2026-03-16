@@ -17,10 +17,14 @@ namespace StudioAssistant
 
         //build some artists to put into the list for testing
 
-        public Artist(string aName, string ContactFirstName, string ContactLastName, string email, string phone)
+        public Artist(string name, string fName, string lName, string email, string phone)
         {
-            aName = ArtistName;
-            
+            ArtistName = name;
+            ContactFirstName = fName;
+            ContactLastName = lName;
+            ContactEmail = email;
+            ContactPhone = phone;
+            ContactDate = DateTime.Now;
         }
 
         public Artist()

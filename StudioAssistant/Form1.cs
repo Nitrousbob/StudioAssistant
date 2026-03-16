@@ -1,13 +1,13 @@
 using System.ComponentModel;
 namespace StudioAssistant
 {
-    public partial class frmHome : Form
+    public partial class Form1 : Form
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SortableBindingList<Artist> Artists { get; set; }
         private bool isDirty = false; // Flag to track unsaved changes
         private string currentFilePath = null; // To track the current file path for saving/loading
-        public frmHome()
+        public Form1()
         {
             InitializeComponent();
 
@@ -27,6 +27,7 @@ namespace StudioAssistant
             if (dirty != isDirty)
             {
                 isDirty = dirty;
+                btnSaveAll.Text = isDirty ? "Save*" : "Save";
                 //update the button to show that there are unsaved changes
             }
         }
@@ -39,68 +40,53 @@ namespace StudioAssistant
 
         private void UpdateButtonState()
         {
-            bool hasArtistData = Artists.Count > 0; // Check if there are any artists in the list
+            bool hasData = Artists.Count > 0; // Check if there are any artists in the list
             // Enable or disable buttons based on the state of the Artists list
-            btnSaveAll.Enabled = isDirty; // Enable Save button if there are unsaved changes
+            btnSaveAll.Enabled = hasData; // Enable Save button if there are unsaved changes
             //btnDelete.Enabled = Artists.Count > 0; // Enable Delete button if there are artists in the list
         }
 
-        //private void lblArtist_Click(object sender, EventArgs e)
-        //{
-        //    ArtistSelection artistSelectionForm = new ArtistSelection();
-        //    artistSelectionForm.ShowDialog();
-
-        //}
-
         private void btn_newArtist_Click(object sender, EventArgs e)
         {
-            var newArtistIntakeForm = new frm_ArtistIntake();
+            var newArtistForm = new ArtistForm();
 
-            if (newArtistIntakeForm.ShowDialog() == DialogResult.OK)
+            if (newArtistForm.ShowDialog() == DialogResult.OK)
             {
-                Artists.Add(newArtistIntakeForm.GetArtist());
+                Artists.Add(newArtistForm.GetArtist());
             }
         }
 
         private void btnEditArtist_Click(object sender, EventArgs e)
         {
-            //fire code to edit the selected Artist from the list and update the form fields
-            var artistForm = new frm_ArtistIntake();
-
-            //get the selected Artist from the DataGridView
-
             var selectedArtist = dgvArtists.CurrentRow?.DataBoundItem as Artist;
 
-            // Create a temporary Artist object to hold the current values of the selected Artist
-            var tempArtist = new Artist(
-                selectedArtist.ArtistName,
-                selectedArtist.ContactFirstName,
-                selectedArtist.ContactLastName,
-                selectedArtist.ContactEmail,
-                selectedArtist.ContactPhone
-                );
-
-            if (selectedArtist == null)
+            if(selectedArtist == null)
             {
-                MessageBox.Show("Please select a Artist to edit.");
+                MessageBox.Show("Please select or create an Artist to edit.");
                 return;
             }
 
-            artistForm.LoadArtist(selectedArtist);
-
-            if (artistForm.ShowDialog() == DialogResult.OK)
+            using (var artistForm = new ArtistForm())
             {
-                //code to extract the Artist from the form
-                var updatedArtist = artistForm.GetArtist(); //get the updated Artist from the form
-                //update the selected Artist with the new values
-                selectedArtist.ArtistName = updatedArtist.ArtistName;
-                selectedArtist.ContactFirstName = updatedArtist.ContactFirstName;
-                selectedArtist.ContactLastName = updatedArtist.ContactLastName;
-                selectedArtist.ContactEmail = updatedArtist.ContactEmail;
-                selectedArtist.ContactPhone = updatedArtist.ContactPhone;
-                //refresh the DataGridView to show the updated Artist
-                //dgvArtists.Refresh();
-                Artists.ResetBindings(); // Notify the DataGridView that the data has changed
+                artistForm.LoadArtist(selectedArtist);
+
+                if (artistForm.ShowDialog() == DialogResult.OK)
+                {
+                    var updated = artistForm.GetArtist();
+
+                    // Map the values back to the original object in the list
+                    selectedArtist.ArtistName = updated.ArtistName;
+                    selectedArtist.ContactFirstName = updated.ContactFirstName;
+                    selectedArtist.ContactLastName = updated.ContactLastName;
+                    selectedArtist.ContactEmail = updated.ContactEmail;
+                    selectedArtist.ContactPhone = updated.ContactPhone;
+
+                    // Update UI
+                    Artists.ResetBindings();
+                    Console.WriteLine(Artists[0].ArtistName);
+                    dgvArtists.Refresh();
+                    SetDirty(true);
+                }
             }
         }
 
@@ -109,24 +95,17 @@ namespace StudioAssistant
             dgvArtists.DataSource = Artists;
         }
 
-        private void btn_selectArtist_Click(object sender, EventArgs e)
+        private void dgvArtists_SelectionChanged(object sender, EventArgs e)
         {
-            //load the selected artist and open the workflo form
-            if (dgvArtists.CurrentRow != null)
-            {
-                Artist selectedArtist = dgvArtists.CurrentRow.DataBoundItem as Artist;
-                if (selectedArtist != null)
-                {
-                    var WorkFlowForm = new WorkFlowForm(selectedArtist);
-                    WorkFlowForm.ShowDialog();
-                }
-            }
+            //check if selected item is valid and enable/disable the Edit button accordingly
+            var selectedArtist = dgvArtists.CurrentRow?.DataBoundItem as Artist;
+            btnEditArtist.Enabled = selectedArtist != null;
         }
 
         private void btnSaveAll_Click(object sender, EventArgs e)
         {
             //Save the artists to a file using serialization, write a CSV file for now.
-            if (Artists.Count == 0 || Artists == null)
+            if (Artists == null || Artists.Count == 0)  //check null before checking count to avoid null reference exception
             {
                 MessageBox.Show("No artists to save.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

@@ -1,6 +1,6 @@
 ﻿namespace StudioAssistant
 {
-    partial class frmHome
+    partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,15 +30,16 @@
         {
             components = new System.ComponentModel.Container();
             lblStaticArtist = new Label();
-            btn_selectArtist = new Button();
+            btnEditArtist = new Button();
             btn_newArtist = new Button();
             dgvArtists = new DataGridView();
-            artistNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            contactEmailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            contactPhoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            contactDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             artistBindingSource = new BindingSource(components);
             btnSaveAll = new Button();
+            artistNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            contactEmailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ContactEmail = new DataGridViewTextBoxColumn();
+            contactPhoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            contactDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvArtists).BeginInit();
             ((System.ComponentModel.ISupportInitialize)artistBindingSource).BeginInit();
             SuspendLayout();
@@ -54,21 +55,21 @@
             lblStaticArtist.TabIndex = 2;
             lblStaticArtist.Text = "Artist";
             // 
-            // btn_selectArtist
+            // btnEditArtist
             // 
-            btn_selectArtist.Location = new Point(8, 30);
-            btn_selectArtist.Margin = new Padding(2, 2, 2, 2);
-            btn_selectArtist.Name = "btn_selectArtist";
-            btn_selectArtist.Size = new Size(104, 20);
-            btn_selectArtist.TabIndex = 3;
-            btn_selectArtist.Text = "Select Artist";
-            btn_selectArtist.UseVisualStyleBackColor = true;
-            btn_selectArtist.Click += btn_selectArtist_Click;
+            btnEditArtist.Location = new Point(8, 30);
+            btnEditArtist.Margin = new Padding(2);
+            btnEditArtist.Name = "btnEditArtist";
+            btnEditArtist.Size = new Size(104, 20);
+            btnEditArtist.TabIndex = 3;
+            btnEditArtist.Text = "Edit Artist";
+            btnEditArtist.UseVisualStyleBackColor = true;
+            btnEditArtist.Click += btnEditArtist_Click;
             // 
             // btn_newArtist
             // 
             btn_newArtist.Location = new Point(117, 30);
-            btn_newArtist.Margin = new Padding(2, 2, 2, 2);
+            btn_newArtist.Margin = new Padding(2);
             btn_newArtist.Name = "btn_newArtist";
             btn_newArtist.Size = new Size(104, 20);
             btn_newArtist.TabIndex = 4;
@@ -80,15 +81,30 @@
             // 
             dgvArtists.AutoGenerateColumns = false;
             dgvArtists.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvArtists.Columns.AddRange(new DataGridViewColumn[] { artistNameDataGridViewTextBoxColumn, contactEmailDataGridViewTextBoxColumn, contactPhoneDataGridViewTextBoxColumn, contactDateDataGridViewTextBoxColumn });
+            dgvArtists.Columns.AddRange(new DataGridViewColumn[] { artistNameDataGridViewTextBoxColumn, contactEmailDataGridViewTextBoxColumn, ContactEmail, contactPhoneDataGridViewTextBoxColumn, contactDateDataGridViewTextBoxColumn });
             dgvArtists.DataSource = artistBindingSource;
             dgvArtists.Location = new Point(8, 59);
-            dgvArtists.Margin = new Padding(2, 2, 2, 2);
+            dgvArtists.Margin = new Padding(2);
             dgvArtists.Name = "dgvArtists";
             dgvArtists.RowHeadersVisible = false;
             dgvArtists.RowHeadersWidth = 62;
-            dgvArtists.Size = new Size(808, 164);
+            dgvArtists.Size = new Size(853, 164);
             dgvArtists.TabIndex = 5;
+            // 
+            // artistBindingSource
+            // 
+            artistBindingSource.DataSource = typeof(Artist);
+            // 
+            // btnSaveAll
+            // 
+            btnSaveAll.Location = new Point(712, 227);
+            btnSaveAll.Margin = new Padding(2);
+            btnSaveAll.Name = "btnSaveAll";
+            btnSaveAll.Size = new Size(104, 20);
+            btnSaveAll.TabIndex = 6;
+            btnSaveAll.Text = "Save All";
+            btnSaveAll.UseVisualStyleBackColor = true;
+            btnSaveAll.Click += btnSaveAll_Click;
             // 
             // artistNameDataGridViewTextBoxColumn
             // 
@@ -101,12 +117,19 @@
             // 
             // contactEmailDataGridViewTextBoxColumn
             // 
-            contactEmailDataGridViewTextBoxColumn.DataPropertyName = "ContactEmail";
-            contactEmailDataGridViewTextBoxColumn.HeaderText = "ContactEmail";
+            contactEmailDataGridViewTextBoxColumn.DataPropertyName = "ContactFirstName";
+            contactEmailDataGridViewTextBoxColumn.HeaderText = "Contact Name";
             contactEmailDataGridViewTextBoxColumn.MinimumWidth = 8;
             contactEmailDataGridViewTextBoxColumn.Name = "contactEmailDataGridViewTextBoxColumn";
             contactEmailDataGridViewTextBoxColumn.ReadOnly = true;
-            contactEmailDataGridViewTextBoxColumn.Width = 300;
+            contactEmailDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // ContactEmail
+            // 
+            ContactEmail.DataPropertyName = "ContactEmail";
+            ContactEmail.HeaderText = "ContactEmail";
+            ContactEmail.Name = "ContactEmail";
+            ContactEmail.Width = 200;
             // 
             // contactPhoneDataGridViewTextBoxColumn
             // 
@@ -126,33 +149,18 @@
             contactDateDataGridViewTextBoxColumn.ReadOnly = true;
             contactDateDataGridViewTextBoxColumn.Width = 150;
             // 
-            // artistBindingSource
-            // 
-            artistBindingSource.DataSource = typeof(Artist);
-            // 
-            // btnSaveAll
-            // 
-            btnSaveAll.Location = new Point(712, 227);
-            btnSaveAll.Margin = new Padding(2, 2, 2, 2);
-            btnSaveAll.Name = "btnSaveAll";
-            btnSaveAll.Size = new Size(104, 20);
-            btnSaveAll.TabIndex = 6;
-            btnSaveAll.Text = "Save All";
-            btnSaveAll.UseVisualStyleBackColor = true;
-            btnSaveAll.Click += btnSaveAll_Click;
-            // 
-            // frmHome
+            // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(827, 252);
+            ClientSize = new Size(872, 252);
             Controls.Add(btnSaveAll);
             Controls.Add(dgvArtists);
             Controls.Add(btn_newArtist);
-            Controls.Add(btn_selectArtist);
+            Controls.Add(btnEditArtist);
             Controls.Add(lblStaticArtist);
-            Margin = new Padding(2, 2, 2, 2);
-            Name = "frmHome";
+            Margin = new Padding(2);
+            Name = "Form1";
             Text = "Studio Assistant";
             ((System.ComponentModel.ISupportInitialize)dgvArtists).EndInit();
             ((System.ComponentModel.ISupportInitialize)artistBindingSource).EndInit();
@@ -162,14 +170,15 @@
 
         #endregion
         private Label lblStaticArtist;
-        private Button btn_selectArtist;
+        private Button btnEditArtist;
         private Button btn_newArtist;
         private DataGridView dgvArtists;
         private BindingSource artistBindingSource;
         private Button btnSaveAll;
-        private DataGridViewTextBoxColumn artistNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn memberNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn artistNameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn contactEmailDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ContactEmail;
         private DataGridViewTextBoxColumn contactPhoneDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn contactDateDataGridViewTextBoxColumn;
     }

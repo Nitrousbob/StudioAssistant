@@ -7,7 +7,7 @@ using System.Linq;
 // or other controls that support sorting. It extends the BindingList<T> class and implements
 // the necessary methods to enable sorting based on a specified property and direction.
 //Gemini helped create this snippet after I asked for sorting functionality for the DataGridView in Form1.
-//I wanted to be able to click on the column headers to sort the customers by that column, and this class
+//I wanted to be able to click on the column headers to sort the artists by that column, and this class
 //provides that functionality.
 
 namespace StudioAssistant

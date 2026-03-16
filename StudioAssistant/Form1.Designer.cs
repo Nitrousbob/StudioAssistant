@@ -33,13 +33,12 @@
             btn_selectArtist = new Button();
             btn_newArtist = new Button();
             dgvArtists = new DataGridView();
-            artistBindingSource = new BindingSource(components);
-            btnSaveAll = new Button();
             artistNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            memberNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             contactEmailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             contactPhoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             contactDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            artistBindingSource = new BindingSource(components);
+            btnSaveAll = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvArtists).BeginInit();
             ((System.ComponentModel.ISupportInitialize)artistBindingSource).BeginInit();
             SuspendLayout();
@@ -48,17 +47,19 @@
             // 
             lblStaticArtist.AutoSize = true;
             lblStaticArtist.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblStaticArtist.Location = new Point(93, 9);
+            lblStaticArtist.Location = new Point(65, 5);
+            lblStaticArtist.Margin = new Padding(2, 0, 2, 0);
             lblStaticArtist.Name = "lblStaticArtist";
-            lblStaticArtist.Size = new Size(91, 38);
+            lblStaticArtist.Size = new Size(61, 25);
             lblStaticArtist.TabIndex = 2;
             lblStaticArtist.Text = "Artist";
             // 
             // btn_selectArtist
             // 
-            btn_selectArtist.Location = new Point(12, 50);
+            btn_selectArtist.Location = new Point(8, 30);
+            btn_selectArtist.Margin = new Padding(2, 2, 2, 2);
             btn_selectArtist.Name = "btn_selectArtist";
-            btn_selectArtist.Size = new Size(149, 34);
+            btn_selectArtist.Size = new Size(104, 20);
             btn_selectArtist.TabIndex = 3;
             btn_selectArtist.Text = "Select Artist";
             btn_selectArtist.UseVisualStyleBackColor = true;
@@ -66,9 +67,10 @@
             // 
             // btn_newArtist
             // 
-            btn_newArtist.Location = new Point(167, 50);
+            btn_newArtist.Location = new Point(117, 30);
+            btn_newArtist.Margin = new Padding(2, 2, 2, 2);
             btn_newArtist.Name = "btn_newArtist";
-            btn_newArtist.Size = new Size(149, 34);
+            btn_newArtist.Size = new Size(104, 20);
             btn_newArtist.TabIndex = 4;
             btn_newArtist.Text = "New Artist";
             btn_newArtist.UseVisualStyleBackColor = true;
@@ -78,28 +80,15 @@
             // 
             dgvArtists.AutoGenerateColumns = false;
             dgvArtists.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvArtists.Columns.AddRange(new DataGridViewColumn[] { artistNameDataGridViewTextBoxColumn, memberNameDataGridViewTextBoxColumn, contactEmailDataGridViewTextBoxColumn, contactPhoneDataGridViewTextBoxColumn, contactDateDataGridViewTextBoxColumn });
+            dgvArtists.Columns.AddRange(new DataGridViewColumn[] { artistNameDataGridViewTextBoxColumn, contactEmailDataGridViewTextBoxColumn, contactPhoneDataGridViewTextBoxColumn, contactDateDataGridViewTextBoxColumn });
             dgvArtists.DataSource = artistBindingSource;
-            dgvArtists.Location = new Point(12, 99);
+            dgvArtists.Location = new Point(8, 59);
+            dgvArtists.Margin = new Padding(2, 2, 2, 2);
             dgvArtists.Name = "dgvArtists";
             dgvArtists.RowHeadersVisible = false;
             dgvArtists.RowHeadersWidth = 62;
-            dgvArtists.Size = new Size(1004, 274);
+            dgvArtists.Size = new Size(808, 164);
             dgvArtists.TabIndex = 5;
-            // 
-            // artistBindingSource
-            // 
-            artistBindingSource.DataSource = typeof(Artist);
-            // 
-            // btnSaveAll
-            // 
-            btnSaveAll.Location = new Point(867, 379);
-            btnSaveAll.Name = "btnSaveAll";
-            btnSaveAll.Size = new Size(149, 34);
-            btnSaveAll.TabIndex = 6;
-            btnSaveAll.Text = "Save All";
-            btnSaveAll.UseVisualStyleBackColor = true;
-            btnSaveAll.Click += btnSaveAll_Click;
             // 
             // artistNameDataGridViewTextBoxColumn
             // 
@@ -109,15 +98,6 @@
             artistNameDataGridViewTextBoxColumn.Name = "artistNameDataGridViewTextBoxColumn";
             artistNameDataGridViewTextBoxColumn.ReadOnly = true;
             artistNameDataGridViewTextBoxColumn.Width = 200;
-            // 
-            // memberNameDataGridViewTextBoxColumn
-            // 
-            memberNameDataGridViewTextBoxColumn.DataPropertyName = "MemberName";
-            memberNameDataGridViewTextBoxColumn.HeaderText = "MemberName";
-            memberNameDataGridViewTextBoxColumn.MinimumWidth = 8;
-            memberNameDataGridViewTextBoxColumn.Name = "memberNameDataGridViewTextBoxColumn";
-            memberNameDataGridViewTextBoxColumn.ReadOnly = true;
-            memberNameDataGridViewTextBoxColumn.Width = 200;
             // 
             // contactEmailDataGridViewTextBoxColumn
             // 
@@ -146,16 +126,32 @@
             contactDateDataGridViewTextBoxColumn.ReadOnly = true;
             contactDateDataGridViewTextBoxColumn.Width = 150;
             // 
+            // artistBindingSource
+            // 
+            artistBindingSource.DataSource = typeof(Artist);
+            // 
+            // btnSaveAll
+            // 
+            btnSaveAll.Location = new Point(712, 227);
+            btnSaveAll.Margin = new Padding(2, 2, 2, 2);
+            btnSaveAll.Name = "btnSaveAll";
+            btnSaveAll.Size = new Size(104, 20);
+            btnSaveAll.TabIndex = 6;
+            btnSaveAll.Text = "Save All";
+            btnSaveAll.UseVisualStyleBackColor = true;
+            btnSaveAll.Click += btnSaveAll_Click;
+            // 
             // frmHome
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1023, 420);
+            ClientSize = new Size(827, 252);
             Controls.Add(btnSaveAll);
             Controls.Add(dgvArtists);
             Controls.Add(btn_newArtist);
             Controls.Add(btn_selectArtist);
             Controls.Add(lblStaticArtist);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "frmHome";
             Text = "Studio Assistant";
             ((System.ComponentModel.ISupportInitialize)dgvArtists).EndInit();

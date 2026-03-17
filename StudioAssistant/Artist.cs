@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace StudioAssistant
+﻿namespace StudioAssistant
 {
     public class Artist
     {
         public string ArtistName { get; set; }
         public string ContactFirstName { get; set; }
         public string ContactLastName { get; set; }
+        public string ContactName
+        {
+            get
+            {
+                return $"{ContactFirstName} {ContactLastName}".Trim();
+            }
+        }
+
         //make a list for multiple members in the future
         public List<string> MemberNames { get; set; }
         public string ContactEmail { get; set; }
@@ -38,7 +42,9 @@ namespace StudioAssistant
             ContactDate = DateTime.Now;
         }
 
-        public override string ToString() {
+       
+        public override string ToString()
+        {
             return $"Artist Name: {ArtistName}, Contact Name: {ContactFirstName} {ContactLastName}, Contact Email: {ContactEmail}, Contact Phone: {ContactPhone}, Contact Date: {ContactDate}";
         }
     }

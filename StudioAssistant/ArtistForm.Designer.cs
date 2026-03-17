@@ -145,13 +145,14 @@
             // 
             // btnSave
             // 
+            btnSave.BackColor = SystemColors.Control;
             btnSave.Location = new Point(702, 11);
             btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(78, 20);
             btnSave.TabIndex = 6;
             btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
+            btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
             // btnCancel
@@ -187,7 +188,7 @@
             // listBox1
             // 
             listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(8, 44);
+            listBox1.Location = new Point(8, 213);
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(120, 94);
             listBox1.TabIndex = 9;
@@ -212,10 +213,12 @@
             Controls.Add(lblContactFirstName);
             Controls.Add(txtArtistName);
             Controls.Add(lblArtistName);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Margin = new Padding(2);
             Name = "ArtistForm";
-            Text = "ArtistIntake";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Artist Form";
+            Load += ArtistForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

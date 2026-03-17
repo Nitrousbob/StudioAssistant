@@ -40,10 +40,7 @@
         private void btnSave_Click(object sender, EventArgs e)
         {
             this.Validate(); // Trigger validation for the form controls
-            // Save the data from the form controls back to the artist object
-            //after saving close the form and return DialogResult.OK to indicate that the artist was saved successfully
-            //open the workflow form for the artist
-
+            
             if (Validators.ContainsValue(txtArtistName.Text) == false)
             {
                 MessageBox.Show("Please enter an Artist name.");
@@ -80,6 +77,8 @@
                     return;
                 }
             }
+
+            this.Validate(); // Trigger validation for the form controls
 
             this.DialogResult = DialogResult.OK;
             this.Close();

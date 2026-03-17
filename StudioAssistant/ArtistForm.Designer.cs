@@ -42,14 +42,15 @@
             btnCancel = new Button();
             txtContactLastName = new TextBox();
             lblContactLastName = new Label();
-            listBox1 = new ListBox();
+            dgvMembers = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dgvMembers).BeginInit();
             SuspendLayout();
             // 
             // lblArtistName
             // 
             lblArtistName.AutoSize = true;
             lblArtistName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblArtistName.Location = new Point(8, 11);
+            lblArtistName.Location = new Point(12, 7);
             lblArtistName.Margin = new Padding(2, 0, 2, 0);
             lblArtistName.Name = "lblArtistName";
             lblArtistName.Size = new Size(74, 15);
@@ -185,20 +186,21 @@
             lblContactLastName.TabIndex = 11;
             lblContactLastName.Text = "Contact Last Name";
             // 
-            // listBox1
+            // dgvMembers
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(8, 213);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(120, 94);
-            listBox1.TabIndex = 9;
+            dgvMembers.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvMembers.Location = new Point(12, 88);
+            dgvMembers.Name = "dgvMembers";
+            dgvMembers.Size = new Size(767, 150);
+            dgvMembers.TabIndex = 15;
             // 
             // ArtistForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(791, 589);
-            Controls.Add(listBox1);
+            Controls.Add(dgvMembers);
             Controls.Add(txtContactLastName);
             Controls.Add(lblContactLastName);
             Controls.Add(btnCancel);
@@ -219,6 +221,7 @@
             StartPosition = FormStartPosition.CenterParent;
             Text = "Artist Form";
             Load += ArtistForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvMembers).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -239,6 +242,6 @@
         private Button btnCancel;
         private TextBox txtContactLastName;
         private Label lblContactLastName;
-        private ListBox listBox1;
+        private DataGridView dgvMembers;
     }
 }

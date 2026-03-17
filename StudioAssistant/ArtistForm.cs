@@ -19,6 +19,13 @@
                 artist.ContactEmail,
                 artist.ContactPhone
             );
+
+            foreach (var m in artist.Members)
+            {
+                _artist.Members.Add(new Member(m.FName, m.LName, m.Instrument));
+            }
+
+            dgvMembers.DataSource = _artist.Members;
         }
 
         public Artist GetArtist()

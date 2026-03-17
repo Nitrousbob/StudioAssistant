@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.Text.Json;
+using System.IO;
 namespace StudioAssistant
 {
     public partial class Form1 : Form
@@ -92,6 +94,7 @@ namespace StudioAssistant
                     selectedArtist.ContactLastName = updated.ContactLastName;
                     selectedArtist.ContactEmail = updated.ContactEmail;
                     selectedArtist.ContactPhone = updated.ContactPhone;
+                    selectedArtist.Members = updated.Members;
 
                     // Update UI
                     Artists.ResetBindings();
@@ -126,151 +129,94 @@ namespace StudioAssistant
 
         private void btnSaveAll_Click(object sender, EventArgs e)
         {
-            //Save the artists to a file using serialization, write a CSV file for now.
-            if (Artists == null || Artists.Count == 0)  //check null before checking count to avoid null reference exception
+            if (Artists == null || Artists.Count == 0)
             {
                 MessageBox.Show("No artists to save.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            // If we don't have a path yet, ask the user
+            if (string.IsNullOrEmpty(currentFilePath))
             {
-                Filter = "CSV files (*.csv)|*.csv",
-                Title = "Save Artist List"
-            };
-
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var filePath = saveFileDialog.FileName;
-
-                using (var writer = new StreamWriter(filePath))
+                SaveFileDialog saveFileDialog = new SaveFileDialog
                 {
-                    // Write the header
-                    writer.WriteLine("ArtistName,ContactFirstName,ContactLastName,ContactEmail,ContactPhone,ContactDate");
-                    // Write each customer as a line in the CSV
-                    foreach (var artist in Artists)
-                    {
-                        string Escape(string field)
-                        {
-                            if (field == null) return "\"\"";
-                            return $"\"{field.Replace("\"", "\"\"")}\""; // Escape quotes by doubling them and wrap the field in quotes
-                        }
+                    Filter = "JSON files (*.json)|*.json",
+                    Title = "Save Artist List"
+                };
 
-                        //Apply the Escape function to each field to ensure proper formatting in the CSV
-                        var line = $"{Escape(artist.ArtistName)}," +
-                                   $"{Escape(artist.ContactFirstName)}," +
-                                   $"{Escape(artist.ContactLastName)}," +
-                                   $"{Escape(artist.ContactEmail)}," +
-                                   $"{Escape(artist.ContactPhone)}," +
-                                   $"{Escape(artist.ContactDate.ToString("o"))}"; // Use ISO 8601 format for date
-                        writer.WriteLine(line);
-                    }
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    currentFilePath = saveFileDialog.FileName;
                 }
+                else return; // User cancelled
             }
+
+            // Now we have a guaranteed path, perform the save
             PerformActualSave(currentFilePath);
         }
 
         private void PerformActualSave(string filePath)
         {
-            using (var writer = new StreamWriter(filePath))
-            {
-                // Write the header
-                writer.WriteLine("ArtistName,ContactFirstName,ContactLastName,ContactEmail,ContactPhone,ContactDate");
-                // Write each artist as a line in the CSV
-                foreach (var artist in Artists)
-                {
-                    string Escape(string field)
-                    {
-                        if (field == null) return "\"\"";
-                        return $"\"{field.Replace("\"", "\"\"")}\""; // Escape quotes by doubling them and wrap the field in quotes
-                    }
+            if (string.IsNullOrWhiteSpace(filePath)) return;
 
-                    //Apply the Escape function to each field to ensure proper formatting in the CSV
-                    var line = $"{Escape(artist.ArtistName)}," +
-                               $"{Escape(artist.ContactFirstName)}," +
-                               $"{Escape(artist.ContactLastName)}," +
-                               $"{Escape(artist.ContactEmail)}," +
-                               $"{Escape(artist.ContactPhone)}," +
-                               $"{Escape(artist.ContactDate.ToString("o"))}"; // Use ISO 8601 format for date
-                    writer.WriteLine(line);
-                }
+            try
+            {
+                // Options to make the file "human readable" with indents
+                var options = new JsonSerializerOptions { WriteIndented = true };
+
+                // This one line replaces your entire loop and Escape function!
+                string jsonString = JsonSerializer.Serialize(Artists, options);
+
+                File.WriteAllText(filePath, jsonString);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Save Error: {ex.Message}");
+            }
+
             SetDirty(false); // Reset the dirty flag after saving
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            //Load the artists from a file,
-            //read a CSV file with the Artist List
             if (Artists.Count > 0)
             {
-                var result = MessageBox.Show(
-                    "Loading a new artist list will replace the current list.\n Do you want to continue?",
-                    "Confirm Load",
-                    MessageBoxButtons.YesNo
-                    );
-
-                if (result == DialogResult.No)
-                {
-                    return; // Exit the loop and proceed with loading
-                }
-
+                var result = MessageBox.Show("Loading will replace the current list. Continue?", "Confirm", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No) return;
             }
 
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "CSV files (*.csv)|*.csv",
+                Filter = "JSON files (*.json)|*.json",
                 Title = "Load Artist List"
             };
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                var filePath = openFileDialog.FileName;
-                Artists.RaiseListChangedEvents = false; // Temporarily disable events to prevent multiple UI updates
                 try
                 {
-                    using (var reader = new StreamReader(filePath))
+                    string jsonString = File.ReadAllText(openFileDialog.FileName);
+                    var loadedArtists = JsonSerializer.Deserialize<List<Artist>>(jsonString);
+
+                    if (loadedArtists != null)
                     {
-                        Artists.Clear(); // Clear existing customers before loading new ones
-                        string line;
-                        bool isFirstLine = true; // Flag to skip the header line
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            if (isFirstLine)
-                            {
-                                isFirstLine = false; // Skip the header line
-                                continue;
-                            }
-                            var parts = line.Split(',');
-                            if (parts.Length == 6)
-                            {
-                                var artist = new Artist
-                                {
-                                    ArtistName = parts[0].Trim('"').Replace("\"\"", "\""), // Remove surrounding quotes and unescape any double quotes
-                                    ContactFirstName = parts[1].Trim('"').Replace("\"\"", "\""),
-                                    ContactLastName = parts[2].Trim('"').Replace("\"\"", "\""),
-                                    ContactEmail = parts[3].Trim('"').Replace("\"\"", "\""),
-                                    ContactPhone = parts[4].Trim('"').Replace("\"\"", "\""),
-                                    ContactDate = DateTime.TryParse(parts[5].Trim('"').Replace("\"\"", "\""), out var date) ? date : DateTime.MinValue
-                                };
-                            Artists.Add(artist);
-                            }
-                        }
+                        Artists.RaiseListChangedEvents = false;
+                        Artists.Clear();
+                        foreach (var a in loadedArtists) Artists.Add(a);
+
+                        currentFilePath = openFileDialog.FileName;
+                        Artists.RaiseListChangedEvents = true;
+                        Artists.ResetBindings();
+                        SetDirty(false);
                     }
-                currentFilePath = openFileDialog.FileName; // Update the current file path after loading
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error loading file: {ex.Message}");
-                }
-                finally
-                {
-                    Artists.RaiseListChangedEvents = true; // Re-enable events after loading
-                    Artists.ResetBindings(); // Refresh the UI after loading
-                    SetDirty(false); // Reset the dirty flag after loading
+                    MessageBox.Show($"Error loading JSON: {ex.Message}");
                 }
             }
         }
+        
            
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

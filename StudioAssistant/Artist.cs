@@ -1,26 +1,33 @@
-﻿namespace StudioAssistant
+﻿using System.ComponentModel;
+
+namespace StudioAssistant
 {
     public class Artist
     {
         public string ArtistName { get; set; }
+        public BindingList<Member> Members { get; set; } = new BindingList<Member>();
+
+        //primary contact fields
         public string ContactFirstName { get; set; }
         public string ContactLastName { get; set; }
-        public string ContactName
-        {
-            get
-            {
-                return $"{ContactFirstName} {ContactLastName}".Trim();
-            }
-        }
-
-        //make a list for multiple members in the future
-        public List<string> MemberNames { get; set; }
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
         public DateTime ContactDate { get; set; }
+        public string ContactName => $"{ContactFirstName} {ContactLastName}".Trim();
 
-        //build some artists to put into the list for testing
+        //parameterless constructor for filling in boxes of an empty object
+        public Artist()
+        {
+            ArtistName = "";
+            ContactFirstName = "";
+            ContactLastName = "";
+            ContactEmail = "";
+            ContactPhone = "";
+            ContactDate = DateTime.Now;
+            Members = new BindingList<Member>();  //initialize the list so its ready to use
+        }
 
+        //overloaded constructor
         public Artist(string name, string fName, string lName, string email, string phone)
         {
             ArtistName = name;
@@ -29,23 +36,14 @@
             ContactEmail = email;
             ContactPhone = phone;
             ContactDate = DateTime.Now;
+            Members = new BindingList<Member>();
         }
 
-        public Artist()
-        {
-            ArtistName = "";
-            MemberNames = new List<string>();
-            ContactFirstName = "";
-            ContactLastName = "";
-            ContactEmail = "";
-            ContactPhone = "";
-            ContactDate = DateTime.Now;
-        }
 
-       
         public override string ToString()
         {
-            return $"Artist Name: {ArtistName}, Contact Name: {ContactFirstName} {ContactLastName}, Contact Email: {ContactEmail}, Contact Phone: {ContactPhone}, Contact Date: {ContactDate}";
-        }
+            string members = Members.Count > 0 ? string.Join(", ", Members) : "None";
+            return $"Artist: {ArtistName} | Members: {members} | Contact: {ContactName}";
+        }  //added string.Join to list the member names
     }
 }

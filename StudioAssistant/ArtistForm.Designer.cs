@@ -30,7 +30,6 @@
         {
             lblArtistName = new Label();
             txtArtistName = new TextBox();
-            txtContactFirstName = new TextBox();
             lblContactFirstName = new Label();
             txtContactEmail = new TextBox();
             lblContactEmail = new Label();
@@ -40,9 +39,15 @@
             lblDate = new Label();
             btnSave = new Button();
             btnCancel = new Button();
-            txtContactLastName = new TextBox();
             lblContactLastName = new Label();
             dgvMembers = new DataGridView();
+            Contact = new DataGridViewCheckBoxColumn();
+            FName = new DataGridViewTextBoxColumn();
+            LName = new DataGridViewTextBoxColumn();
+            Instrument = new DataGridViewTextBoxColumn();
+            btnAddMember = new Button();
+            txtContactFirstName = new Label();
+            txtContactLastName = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvMembers).BeginInit();
             SuspendLayout();
             // 
@@ -64,14 +69,6 @@
             txtArtistName.Name = "txtArtistName";
             txtArtistName.Size = new Size(297, 23);
             txtArtistName.TabIndex = 0;
-            // 
-            // txtContactFirstName
-            // 
-            txtContactFirstName.Location = new Point(150, 444);
-            txtContactFirstName.Margin = new Padding(2);
-            txtContactFirstName.Name = "txtContactFirstName";
-            txtContactFirstName.Size = new Size(170, 23);
-            txtContactFirstName.TabIndex = 1;
             // 
             // lblContactFirstName
             // 
@@ -167,14 +164,6 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
-            // txtContactLastName
-            // 
-            txtContactLastName.Location = new Point(150, 471);
-            txtContactLastName.Margin = new Padding(2);
-            txtContactLastName.Name = "txtContactLastName";
-            txtContactLastName.Size = new Size(170, 23);
-            txtContactLastName.TabIndex = 2;
-            // 
             // lblContactLastName
             // 
             lblContactLastName.AutoSize = true;
@@ -188,20 +177,85 @@
             // 
             // dgvMembers
             // 
+            dgvMembers.AllowUserToAddRows = false;
+            dgvMembers.AllowUserToResizeRows = false;
             dgvMembers.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvMembers.Columns.AddRange(new DataGridViewColumn[] { Contact, FName, LName, Instrument });
             dgvMembers.Location = new Point(12, 88);
             dgvMembers.Name = "dgvMembers";
+            dgvMembers.RowHeadersVisible = false;
+            dgvMembers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMembers.Size = new Size(767, 150);
             dgvMembers.TabIndex = 15;
+            dgvMembers.CellValueChanged += dgvMembers_CellValueChanged;
+            dgvMembers.CurrentCellDirtyStateChanged += dgvMembers_CurrentCellDirtyStateChanged;
+            // 
+            // Contact
+            // 
+            Contact.DataPropertyName = "IsPrimaryContact";
+            Contact.HeaderText = "Contact";
+            Contact.Name = "Contact";
+            Contact.Width = 60;
+            // 
+            // FName
+            // 
+            FName.DataPropertyName = "FName";
+            FName.HeaderText = "First Name";
+            FName.Name = "FName";
+            FName.Width = 150;
+            // 
+            // LName
+            // 
+            LName.DataPropertyName = "LName";
+            LName.HeaderText = "Last Name";
+            LName.Name = "LName";
+            LName.Width = 150;
+            // 
+            // Instrument
+            // 
+            Instrument.DataPropertyName = "Instrument";
+            Instrument.HeaderText = "Instrument";
+            Instrument.Name = "Instrument";
+            Instrument.Width = 250;
+            // 
+            // btnAddMember
+            // 
+            btnAddMember.Location = new Point(12, 244);
+            btnAddMember.Name = "btnAddMember";
+            btnAddMember.Size = new Size(75, 23);
+            btnAddMember.TabIndex = 16;
+            btnAddMember.Text = "Add Member";
+            btnAddMember.UseVisualStyleBackColor = true;
+            btnAddMember.Click += button1_Click;
+            // 
+            // txtContactFirstName
+            // 
+            txtContactFirstName.BorderStyle = BorderStyle.FixedSingle;
+            txtContactFirstName.Location = new Point(150, 451);
+            txtContactFirstName.Name = "txtContactFirstName";
+            txtContactFirstName.Size = new Size(170, 23);
+            txtContactFirstName.TabIndex = 17;
+            txtContactFirstName.Text = "Contact First Name";
+            // 
+            // txtContactLastName
+            // 
+            txtContactLastName.BorderStyle = BorderStyle.FixedSingle;
+            txtContactLastName.Location = new Point(150, 478);
+            txtContactLastName.Name = "txtContactLastName";
+            txtContactLastName.Size = new Size(170, 22);
+            txtContactLastName.TabIndex = 18;
+            txtContactLastName.Text = "Contact Last Name";
             // 
             // ArtistForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(791, 589);
-            Controls.Add(dgvMembers);
             Controls.Add(txtContactLastName);
+            Controls.Add(txtContactFirstName);
+            Controls.Add(btnAddMember);
+            Controls.Add(dgvMembers);
             Controls.Add(lblContactLastName);
             Controls.Add(btnCancel);
             Controls.Add(btnSave);
@@ -211,7 +265,6 @@
             Controls.Add(lblContactPhone);
             Controls.Add(txtContactEmail);
             Controls.Add(lblContactEmail);
-            Controls.Add(txtContactFirstName);
             Controls.Add(lblContactFirstName);
             Controls.Add(txtArtistName);
             Controls.Add(lblArtistName);
@@ -230,7 +283,6 @@
 
         private Label lblArtistName;
         private TextBox txtArtistName;
-        private TextBox txtContactFirstName;
         private Label lblContactFirstName;
         private TextBox txtContactEmail;
         private Label lblContactEmail;
@@ -240,8 +292,14 @@
         private Label lblDate;
         private Button btnSave;
         private Button btnCancel;
-        private TextBox txtContactLastName;
         private Label lblContactLastName;
         private DataGridView dgvMembers;
+        private Button btnAddMember;
+        private DataGridViewCheckBoxColumn Contact;
+        private DataGridViewTextBoxColumn FName;
+        private DataGridViewTextBoxColumn LName;
+        private DataGridViewTextBoxColumn Instrument;
+        private Label txtContactFirstName;
+        private Label txtContactLastName;
     }
 }

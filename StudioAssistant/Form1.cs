@@ -54,7 +54,7 @@ namespace StudioAssistant
             btnDelete.Enabled = Artists.Count > 0; // Enable Delete button if there are artists in the list
         }
 
-        
+
 
         private void btnNewArtist_Click(object sender, EventArgs e)
         {
@@ -109,7 +109,7 @@ namespace StudioAssistant
         {
             dgvArtists.AutoGenerateColumns = false;
             dgvArtists.DataSource = Artists;
-           
+
         }
 
         private void dgvArtists_SelectionChanged(object sender, EventArgs e)
@@ -119,7 +119,8 @@ namespace StudioAssistant
             if (selectedArtist != null)
             {
                 lblStaticArtist.Text = selectedArtist.ArtistName;
-            } else
+            }
+            else
             {
                 lblStaticArtist.Text = "Artist";
             }
@@ -216,8 +217,8 @@ namespace StudioAssistant
                 }
             }
         }
-        
-           
+
+
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -265,6 +266,14 @@ namespace StudioAssistant
                 //The binding list will automatically update the DataGridView
                 //when an item is removed, so we don't need to manually refresh it.
             }
-}
+        }
+
+        private void dgvArtists_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Ensure the double-click is on a valid row
+            {
+                btnEditArtist_Click(sender, e); // Reuse the existing edit logic
+            }
+        }
     }
 }

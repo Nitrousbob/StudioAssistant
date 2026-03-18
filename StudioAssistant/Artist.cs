@@ -5,13 +5,14 @@ namespace StudioAssistant
     public class Artist
     {
         public string ArtistName { get; set; }
-        public BindingList<Member> Members { get; set; } = new BindingList<Member>();
+        public BindingList<Member> Members { get; set; } = new SortableBindingList<Member>();
 
         //primary contact fields
         public string ContactFirstName { get; set; }
         public string ContactLastName { get; set; }
         public string ContactEmail { get; set; }
         public string ContactPhone { get; set; }
+        public bool IsTextPreferred { get; set; }
         public DateTime ContactDate { get; set; }
         public string ContactName => $"{ContactFirstName} {ContactLastName}".Trim();
 
@@ -23,20 +24,23 @@ namespace StudioAssistant
             ContactLastName = "";
             ContactEmail = "";
             ContactPhone = "";
+            IsTextPreferred = false;
             ContactDate = DateTime.Now;
-            Members = new BindingList<Member>();  //initialize the list so its ready to use
+            Members = new SortableBindingList<Member>();  //initialize the list so its ready to use
         }
 
         //overloaded constructor
-        public Artist(string name, string fName, string lName, string email, string phone)
+        public Artist(string name, string fName, string lName, string email, string phone, bool isText)
         {
             ArtistName = name;
             ContactFirstName = fName;
             ContactLastName = lName;
             ContactEmail = email;
             ContactPhone = phone;
+            IsTextPreferred = isText;
             ContactDate = DateTime.Now;
-            Members = new BindingList<Member>();
+
+            Members = new SortableBindingList<Member>();
         }
 
 

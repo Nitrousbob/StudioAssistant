@@ -19,11 +19,14 @@
                 artist.ContactFirstName,
                 artist.ContactLastName,
                 artist.ContactEmail,
-                artist.ContactPhone
+                artist.ContactPhone,
+                artist.IsTextPreferred
             );
 
+            if (_artist.Members == null) _artist.Members = new SortableBindingList<Member>();
             _artist.Members.Clear(); // Clear any existing members in the new instance
 
+            //Fill the list
             foreach (var m in artist.Members)
             {
                 _artist.Members.Add(new Member(m.FName, m.LName, m.Instrument, m.IsPrimaryContact));
@@ -40,7 +43,9 @@
         private void ArtistForm_Load(object sender, EventArgs e)
         {
             // Load the artist data into the form controls
+            //(FormName_Load) is the default event handler for when the form loads, so we can set up our data bindings here.
             txtArtistName.DataBindings.Add("Text", _artist, "ArtistName");
+            cbTextPreferred.DataBindings.Add("Checked", _artist, "IsTextPreferred", true, DataSourceUpdateMode.OnPropertyChanged);
 
             txtContactFirstName.DataBindings.Add("Text", _artist, "ContactFirstName");
             txtContactLastName.DataBindings.Add("Text", _artist, "ContactLastName");
@@ -93,8 +98,11 @@
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+            _artist.Members.Add(new Member("New", "Member", "Instrument")); // Add a new member with default values
             dgvMembers.EndEdit(); // Ensure any edits in the DataGridView are committed to the data source
-            _artist.Members.Add(new Member("New", "Member", "Instrument"));
+            dgvMembers.ResetBindings(); // Notify the DataGridView that the data source has changed
+           dgvMembers.Refresh(); // Refresh the DataGridView to show the new member
         }
 
         //I had issues with CellValueChanged getting a null reference exception when trying to access because of the PrimaryContact Checkbox.

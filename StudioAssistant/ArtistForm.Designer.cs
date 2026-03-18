@@ -41,13 +41,14 @@
             btnCancel = new Button();
             lblContactLastName = new Label();
             dgvMembers = new DataGridView();
+            btnAddMember = new Button();
+            txtContactFirstName = new Label();
+            txtContactLastName = new Label();
+            cbTextPreferred = new CheckBox();
             Contact = new DataGridViewCheckBoxColumn();
             FName = new DataGridViewTextBoxColumn();
             LName = new DataGridViewTextBoxColumn();
             Instrument = new DataGridViewTextBoxColumn();
-            btnAddMember = new Button();
-            txtContactFirstName = new Label();
-            txtContactLastName = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvMembers).BeginInit();
             SuspendLayout();
             // 
@@ -191,34 +192,6 @@
             dgvMembers.CellValueChanged += dgvMembers_CellValueChanged;
             dgvMembers.CurrentCellDirtyStateChanged += dgvMembers_CurrentCellDirtyStateChanged;
             // 
-            // Contact
-            // 
-            Contact.DataPropertyName = "IsPrimaryContact";
-            Contact.HeaderText = "Contact";
-            Contact.Name = "Contact";
-            Contact.Width = 60;
-            // 
-            // FName
-            // 
-            FName.DataPropertyName = "FName";
-            FName.HeaderText = "First Name";
-            FName.Name = "FName";
-            FName.Width = 150;
-            // 
-            // LName
-            // 
-            LName.DataPropertyName = "LName";
-            LName.HeaderText = "Last Name";
-            LName.Name = "LName";
-            LName.Width = 150;
-            // 
-            // Instrument
-            // 
-            Instrument.DataPropertyName = "Instrument";
-            Instrument.HeaderText = "Instrument";
-            Instrument.Name = "Instrument";
-            Instrument.Width = 250;
-            // 
             // btnAddMember
             // 
             btnAddMember.Location = new Point(12, 244);
@@ -247,11 +220,50 @@
             txtContactLastName.TabIndex = 18;
             txtContactLastName.Text = "Contact Last Name";
             // 
+            // cbTextPreferred
+            // 
+            cbTextPreferred.AutoSize = true;
+            cbTextPreferred.Location = new Point(349, 529);
+            cbTextPreferred.Name = "cbTextPreferred";
+            cbTextPreferred.Size = new Size(98, 19);
+            cbTextPreferred.TabIndex = 20;
+            cbTextPreferred.Text = "Text Preferred";
+            cbTextPreferred.UseVisualStyleBackColor = true;
+            // 
+            // Contact
+            // 
+            Contact.DataPropertyName = "IsPrimaryContact";
+            Contact.HeaderText = "Contact";
+            Contact.Name = "Contact";
+            Contact.Width = 60;
+            // 
+            // FName
+            // 
+            FName.DataPropertyName = "FName";
+            FName.HeaderText = "First Name";
+            FName.Name = "FName";
+            FName.Width = 150;
+            // 
+            // LName
+            // 
+            LName.DataPropertyName = "LName";
+            LName.HeaderText = "Last Name";
+            LName.Name = "LName";
+            LName.Width = 150;
+            // 
+            // Instrument
+            // 
+            Instrument.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Instrument.DataPropertyName = "Instrument";
+            Instrument.HeaderText = "Instrument";
+            Instrument.Name = "Instrument";
+            // 
             // ArtistForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(791, 589);
+            Controls.Add(cbTextPreferred);
             Controls.Add(txtContactLastName);
             Controls.Add(txtContactFirstName);
             Controls.Add(btnAddMember);
@@ -295,11 +307,12 @@
         private Label lblContactLastName;
         private DataGridView dgvMembers;
         private Button btnAddMember;
+        private Label txtContactFirstName;
+        private Label txtContactLastName;
+        private CheckBox cbTextPreferred;
         private DataGridViewCheckBoxColumn Contact;
         private DataGridViewTextBoxColumn FName;
         private DataGridViewTextBoxColumn LName;
         private DataGridViewTextBoxColumn Instrument;
-        private Label txtContactFirstName;
-        private Label txtContactLastName;
     }
 }

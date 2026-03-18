@@ -94,6 +94,7 @@ namespace StudioAssistant
                     selectedArtist.ContactLastName = updated.ContactLastName;
                     selectedArtist.ContactEmail = updated.ContactEmail;
                     selectedArtist.ContactPhone = updated.ContactPhone;
+                    selectedArtist.IsTextPreferred = updated.IsTextPreferred;   
                     selectedArtist.Members = updated.Members;
 
                     // Update UI

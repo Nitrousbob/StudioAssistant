@@ -5,7 +5,7 @@
 // the necessary methods to enable sorting based on a specified property and direction.
 //Gemini helped create this snippet after I asked for sorting functionality for the DataGridView in Form1.
 //I wanted to be able to click on the column headers to sort the artists by that column, and this class
-//provides that functionality.
+//provides that functionality. I reused this classs because I like the functionality it provides.
 
 namespace StudioAssistant
 {

@@ -54,8 +54,6 @@ namespace StudioAssistant
             btnDelete.Enabled = Artists.Count > 0; // Enable Delete button if there are artists in the list
         }
 
-
-
         private void btnNewArtist_Click(object sender, EventArgs e)
         {
             ArtistForm artistForm = new ArtistForm();
@@ -166,7 +164,7 @@ namespace StudioAssistant
                 // Options to make the file "human readable" with indents
                 var options = new JsonSerializerOptions { WriteIndented = true };
 
-                // This one line replaces your entire loop and Escape function!
+                // It was suggessted to use the JSon format for saving and loading the data.
                 string jsonString = JsonSerializer.Serialize(Artists, options);
 
                 File.WriteAllText(filePath, jsonString);
@@ -208,8 +206,8 @@ namespace StudioAssistant
 
                         currentFilePath = openFileDialog.FileName;
                         Artists.RaiseListChangedEvents = true;
-                        Artists.ResetBindings();
-                        SetDirty(false);
+                        Artists.ResetBindings();  // Refresh the DataGridView after loading
+                        SetDirty(false);  // Reset dirty flag since we just loaded fresh data
                     }
                 }
                 catch (Exception ex)
@@ -218,8 +216,6 @@ namespace StudioAssistant
                 }
             }
         }
-
-
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {

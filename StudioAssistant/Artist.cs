@@ -4,6 +4,10 @@ namespace StudioAssistant
 {
     public class Artist
     {
+        //TODO: Add a next contact date field that can be used with a scheduler
+        //TODO: Add a style field that can be used for sorting and filtering, possible enum for styles?
+        //Todo: Export to Markdown for printing basic forms or making notes for artists.
+        //Todo: Add a way to track artist payment and payment history, maybe a list of payments with date and amount?  encryption for sensitive data?
         public string ArtistName { get; set; }
         public SortableBindingList<Member> Members { get; set; }
         //primary contact fields
@@ -42,7 +46,7 @@ namespace StudioAssistant
             Members = new SortableBindingList<Member>();
         }
 
-
+        //this override is sad because its not used, but is useful for debugging and testing.
         public override string ToString()
         {
             string members = Members.Count > 0 ? string.Join(", ", Members) : "None";

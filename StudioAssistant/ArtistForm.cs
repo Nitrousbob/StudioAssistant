@@ -2,6 +2,11 @@
 {
     public partial class ArtistForm : Form
     {
+        //TODO Add a scheduler for follow up or add it to the main form with a next contact
+        //date field in the artist class.  Could have a reminder to also follow up or schedul.
+        //The reminder could email the artist or send a text.
+
+
         private Artist _artist; // Field to hold the artist data
         public ArtistForm()
         {
@@ -53,7 +58,6 @@
             txtContactEmail.DataBindings.Add("Text", _artist, "ContactEmail");
             txtContactPhone.DataBindings.Add("Text", _artist, "ContactPhone");
             dtpContactDate.DataBindings.Add("Value", _artist, "ContactDate");
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -84,7 +88,6 @@
                     return;
                 }
             }
-
             //this.Validate(); // Trigger validation for the form controls
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -115,17 +118,16 @@
 
                 if (member.IsPrimaryContact)
                 {
-                    // 1. Uncheck everyone else
+                    // Uncheck everyone else
                     foreach (var m in _artist.Members)
                     {
                         if (m != member) m.IsPrimaryContact = false;
                     }
-
-                    // 2. Update the Artist object
+                    //Update the Artist object
                     _artist.ContactFirstName = member.FName;
                     _artist.ContactLastName = member.LName;
 
-                    // 3. Safety Guard: Only refresh if bindings exist
+                    // Refresh the bindings for the contact name text boxes
                     if (txtContactFirstName.DataBindings.Count > 0)
                     {
                         txtContactFirstName.DataBindings[0].ReadValue();

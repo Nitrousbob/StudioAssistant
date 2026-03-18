@@ -38,6 +38,8 @@ namespace StudioAssistant
                 isDirty = dirty;
                 btnSaveAll.Text = isDirty ? "Save*" : "Save";
                 //update the button to show that there are unsaved changes
+                //Todo: Maybe a save as button. but Maybe they dont need to do that, and maybe having a backup
+                //that saves a copy of the loaded file with a timestamp in the name would be good enough for now.
             }
         }
         private void Artists_ListChanged(object sender, ListChangedEventArgs e)

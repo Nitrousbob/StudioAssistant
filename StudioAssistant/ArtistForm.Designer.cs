@@ -41,14 +41,14 @@
             btnCancel = new Button();
             lblContactLastName = new Label();
             dgvMembers = new DataGridView();
-            btnAddMember = new Button();
-            txtContactFirstName = new Label();
-            txtContactLastName = new Label();
-            cbTextPreferred = new CheckBox();
             Contact = new DataGridViewCheckBoxColumn();
             FName = new DataGridViewTextBoxColumn();
             LName = new DataGridViewTextBoxColumn();
             Instrument = new DataGridViewTextBoxColumn();
+            btnAddMember = new Button();
+            txtContactFirstName = new Label();
+            txtContactLastName = new Label();
+            cbTextPreferred = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dgvMembers).BeginInit();
             SuspendLayout();
             // 
@@ -179,6 +179,7 @@
             // dgvMembers
             // 
             dgvMembers.AllowUserToAddRows = false;
+            dgvMembers.AllowUserToDeleteRows = false;
             dgvMembers.AllowUserToResizeRows = false;
             dgvMembers.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvMembers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -191,6 +192,34 @@
             dgvMembers.TabIndex = 15;
             dgvMembers.CellValueChanged += dgvMembers_CellValueChanged;
             dgvMembers.CurrentCellDirtyStateChanged += dgvMembers_CurrentCellDirtyStateChanged;
+            // 
+            // Contact
+            // 
+            Contact.DataPropertyName = "IsPrimaryContact";
+            Contact.HeaderText = "Contact";
+            Contact.Name = "Contact";
+            Contact.Width = 60;
+            // 
+            // FName
+            // 
+            FName.DataPropertyName = "FName";
+            FName.HeaderText = "First Name";
+            FName.Name = "FName";
+            FName.Width = 150;
+            // 
+            // LName
+            // 
+            LName.DataPropertyName = "LName";
+            LName.HeaderText = "Last Name";
+            LName.Name = "LName";
+            LName.Width = 150;
+            // 
+            // Instrument
+            // 
+            Instrument.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            Instrument.DataPropertyName = "Instrument";
+            Instrument.HeaderText = "Instrument";
+            Instrument.Name = "Instrument";
             // 
             // btnAddMember
             // 
@@ -229,34 +258,6 @@
             cbTextPreferred.TabIndex = 20;
             cbTextPreferred.Text = "Text Preferred";
             cbTextPreferred.UseVisualStyleBackColor = true;
-            // 
-            // Contact
-            // 
-            Contact.DataPropertyName = "IsPrimaryContact";
-            Contact.HeaderText = "Contact";
-            Contact.Name = "Contact";
-            Contact.Width = 60;
-            // 
-            // FName
-            // 
-            FName.DataPropertyName = "FName";
-            FName.HeaderText = "First Name";
-            FName.Name = "FName";
-            FName.Width = 150;
-            // 
-            // LName
-            // 
-            LName.DataPropertyName = "LName";
-            LName.HeaderText = "Last Name";
-            LName.Name = "LName";
-            LName.Width = 150;
-            // 
-            // Instrument
-            // 
-            Instrument.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Instrument.DataPropertyName = "Instrument";
-            Instrument.HeaderText = "Instrument";
-            Instrument.Name = "Instrument";
             // 
             // ArtistForm
             // 

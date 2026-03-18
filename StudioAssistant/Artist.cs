@@ -5,8 +5,7 @@ namespace StudioAssistant
     public class Artist
     {
         public string ArtistName { get; set; }
-        public BindingList<Member> Members { get; set; } = new SortableBindingList<Member>();
-
+        public SortableBindingList<Member> Members { get; set; }
         //primary contact fields
         public string ContactFirstName { get; set; }
         public string ContactLastName { get; set; }

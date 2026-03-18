@@ -98,11 +98,11 @@
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            _artist.Members.Add(new Member("New", "Member", "Instrument")); // Add a new member with default values
-            dgvMembers.EndEdit(); // Ensure any edits in the DataGridView are committed to the data source
-            dgvMembers.ResetBindings(); // Notify the DataGridView that the data source has changed
-           dgvMembers.Refresh(); // Refresh the DataGridView to show the new member
+            _artist.Members.Add(new Member("New", "Member", "Instrument", false)); // Add a new member with default values
+            //MessageBox.Show($"Button Clicked: Current Member Count: {_artist.Members.Count}");  //for debugging the member add functionality
+            dgvMembers.DataSource = null; // Unbind the DataGridView to prevent issues with adding new items
+            dgvMembers.DataSource = _artist.Members; // Rebind the DataGridView to the members list
+            //MessageBox.Show($"Grid now thinks it has {dgvMembers.Rows.Count} rows."); //for debugging the member add functionality
         }
 
         //I had issues with CellValueChanged getting a null reference exception when trying to access because of the PrimaryContact Checkbox.

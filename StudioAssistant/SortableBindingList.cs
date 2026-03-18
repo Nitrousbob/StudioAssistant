@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 
 // This class provides a sortable binding list that can be used to bind to a DataGridView
 // or other controls that support sorting. It extends the BindingList<T> class and implements

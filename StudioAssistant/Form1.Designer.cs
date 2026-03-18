@@ -32,51 +32,60 @@
             btnEditArtist = new Button();
             btnNewArtist = new Button();
             dgvArtists = new DataGridView();
-            btnSaveAll = new Button();
-            btnLoad = new Button();
-            btnDelete = new Button();
             colArtistName = new DataGridViewTextBoxColumn();
             colContactName = new DataGridViewTextBoxColumn();
             colEmail = new DataGridViewTextBoxColumn();
             colPhone = new DataGridViewTextBoxColumn();
             colLastContacted = new DataGridViewTextBoxColumn();
+            btnSaveAll = new Button();
+            btnLoad = new Button();
+            btnDelete = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel4 = new Panel();
+            panel3 = new Panel();
             ((System.ComponentModel.ISupportInitialize)dgvArtists).BeginInit();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // lblStaticArtist
             // 
-            lblStaticArtist.Anchor = AnchorStyles.Top;
-            lblStaticArtist.AutoSize = true;
+            lblStaticArtist.BackColor = Color.DarkOrange;
+            lblStaticArtist.Dock = DockStyle.Top;
             lblStaticArtist.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblStaticArtist.Location = new Point(389, 9);
+            lblStaticArtist.Location = new Point(0, 0);
             lblStaticArtist.Margin = new Padding(2, 0, 2, 0);
             lblStaticArtist.Name = "lblStaticArtist";
-            lblStaticArtist.Size = new Size(93, 40);
+            lblStaticArtist.Size = new Size(924, 52);
             lblStaticArtist.TabIndex = 2;
             lblStaticArtist.Text = "Artist";
-            lblStaticArtist.TextAlign = ContentAlignment.TopCenter;
+            lblStaticArtist.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // btnEditArtist
             // 
             btnEditArtist.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnEditArtist.BackColor = Color.White;
             btnEditArtist.Enabled = false;
-            btnEditArtist.Location = new Point(97, 424);
+            btnEditArtist.Font = new Font("Segoe UI", 12F);
+            btnEditArtist.Location = new Point(97, 409);
             btnEditArtist.Margin = new Padding(2);
             btnEditArtist.Name = "btnEditArtist";
-            btnEditArtist.Size = new Size(70, 20);
+            btnEditArtist.Size = new Size(70, 35);
             btnEditArtist.TabIndex = 3;
             btnEditArtist.Text = "Edit Artist";
-            btnEditArtist.UseVisualStyleBackColor = true;
+            btnEditArtist.UseVisualStyleBackColor = false;
             btnEditArtist.Click += btnEditArtist_Click;
             // 
             // btnNewArtist
             // 
             btnNewArtist.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnNewArtist.BackColor = SystemColors.Control;
-            btnNewArtist.Location = new Point(23, 424);
+            btnNewArtist.BackColor = Color.White;
+            btnNewArtist.Font = new Font("Segoe UI", 12F);
+            btnNewArtist.Location = new Point(23, 409);
             btnNewArtist.Margin = new Padding(2);
             btnNewArtist.Name = "btnNewArtist";
-            btnNewArtist.Size = new Size(70, 20);
+            btnNewArtist.Size = new Size(70, 35);
             btnNewArtist.TabIndex = 4;
             btnNewArtist.Text = "&New Artist";
             btnNewArtist.UseVisualStyleBackColor = false;
@@ -87,55 +96,20 @@
             dgvArtists.AllowUserToAddRows = false;
             dgvArtists.AllowUserToResizeRows = false;
             dgvArtists.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvArtists.BorderStyle = BorderStyle.Fixed3D;
+            dgvArtists.BackgroundColor = Color.DarkOrange;
             dgvArtists.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvArtists.Columns.AddRange(new DataGridViewColumn[] { colArtistName, colContactName, colEmail, colPhone, colLastContacted });
+            dgvArtists.GridColor = Color.Black;
             dgvArtists.Location = new Point(11, 59);
             dgvArtists.Margin = new Padding(2);
             dgvArtists.Name = "dgvArtists";
             dgvArtists.RowHeadersVisible = false;
             dgvArtists.RowHeadersWidth = 62;
             dgvArtists.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvArtists.Size = new Size(915, 361);
+            dgvArtists.Size = new Size(912, 346);
             dgvArtists.TabIndex = 5;
             dgvArtists.CellDoubleClick += dgvArtists_CellDoubleClick;
             dgvArtists.SelectionChanged += dgvArtists_SelectionChanged;
-            // 
-            // btnSaveAll
-            // 
-            btnSaveAll.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnSaveAll.Location = new Point(695, 424);
-            btnSaveAll.Margin = new Padding(2);
-            btnSaveAll.Name = "btnSaveAll";
-            btnSaveAll.Size = new Size(104, 20);
-            btnSaveAll.TabIndex = 6;
-            btnSaveAll.Text = "Save All";
-            btnSaveAll.UseVisualStyleBackColor = true;
-            btnSaveAll.Click += btnSaveAll_Click;
-            // 
-            // btnLoad
-            // 
-            btnLoad.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnLoad.Location = new Point(803, 424);
-            btnLoad.Margin = new Padding(2);
-            btnLoad.Name = "btnLoad";
-            btnLoad.Size = new Size(104, 20);
-            btnLoad.TabIndex = 7;
-            btnLoad.Text = "Load";
-            btnLoad.UseVisualStyleBackColor = true;
-            btnLoad.Click += btnLoad_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDelete.Location = new Point(171, 424);
-            btnDelete.Margin = new Padding(2);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(70, 20);
-            btnDelete.TabIndex = 9;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDeleteArtist_Click;
             // 
             // colArtistName
             // 
@@ -177,6 +151,89 @@
             colLastContacted.Name = "colLastContacted";
             colLastContacted.Width = 120;
             // 
+            // btnSaveAll
+            // 
+            btnSaveAll.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnSaveAll.BackColor = Color.White;
+            btnSaveAll.Font = new Font("Segoe UI", 12F);
+            btnSaveAll.Location = new Point(695, 409);
+            btnSaveAll.Margin = new Padding(2);
+            btnSaveAll.Name = "btnSaveAll";
+            btnSaveAll.Size = new Size(104, 35);
+            btnSaveAll.TabIndex = 6;
+            btnSaveAll.Text = "Save All";
+            btnSaveAll.UseVisualStyleBackColor = false;
+            btnSaveAll.Click += btnSaveAll_Click;
+            // 
+            // btnLoad
+            // 
+            btnLoad.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnLoad.BackColor = Color.White;
+            btnLoad.Font = new Font("Segoe UI", 12F);
+            btnLoad.Location = new Point(803, 409);
+            btnLoad.Margin = new Padding(2);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new Size(104, 35);
+            btnLoad.TabIndex = 7;
+            btnLoad.Text = "Load";
+            btnLoad.UseVisualStyleBackColor = false;
+            btnLoad.Click += btnLoad_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnDelete.BackColor = Color.White;
+            btnDelete.Font = new Font("Segoe UI", 12F);
+            btnDelete.Location = new Point(171, 409);
+            btnDelete.Margin = new Padding(2);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(70, 35);
+            btnDelete.TabIndex = 9;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDeleteArtist_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.Black;
+            panel1.Controls.Add(panel2);
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Padding = new Padding(5);
+            panel1.Size = new Size(934, 455);
+            panel1.TabIndex = 10;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.DarkOrange;
+            panel2.Controls.Add(panel4);
+            panel2.Controls.Add(panel3);
+            panel2.Controls.Add(lblStaticArtist);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(5, 5);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(924, 445);
+            panel2.TabIndex = 11;
+            // 
+            // panel4
+            // 
+            panel4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            panel4.AutoSize = true;
+            panel4.BackColor = Color.Black;
+            panel4.Location = new Point(663, 7);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(254, 19);
+            panel4.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.Black;
+            panel3.Location = new Point(7, 25);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(254, 19);
+            panel3.TabIndex = 0;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -190,7 +247,7 @@
             Controls.Add(dgvArtists);
             Controls.Add(btnNewArtist);
             Controls.Add(btnEditArtist);
-            Controls.Add(lblStaticArtist);
+            Controls.Add(panel1);
             Margin = new Padding(2);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -198,8 +255,10 @@
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dgvArtists).EndInit();
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -215,5 +274,9 @@
         private DataGridViewTextBoxColumn colEmail;
         private DataGridViewTextBoxColumn colPhone;
         private DataGridViewTextBoxColumn colLastContacted;
+        private Panel panel1;
+        private Panel panel2;
+        private Panel panel4;
+        private Panel panel3;
     }
 }
